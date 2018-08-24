@@ -1,0 +1,115 @@
+.fnd #banner{
+  background-color:#274b72;
+}
+.btn-sq, .clps h3:before, .btn-rnd{
+  background-color:rgba(39, 75, 114,.6);
+}
+.btn-sq:hover, .clps h3:hover:before, .btn-rnd:hover, .fnd #tabs .btns h2.btn-2.filtered:before{
+  background-color:#274b72;
+}
+.tabs .btns h2.active{
+  background-color:#274b72;
+}
+.tabs .btns h2.active *{
+  background-color:#274b72;
+  color:#fff
+}
+.tabs{
+  background-color:#DAE1E6;
+  border:1px solid #566A78
+}
+#filters label {
+  line-height: 21px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.pop>.content {
+  width: 200px;
+}
+@media only screen and (max-width : 750px), screen and (max-device-height: 350px) {
+  .fnd #tabs .btns h2.btn-2 {
+    display: table-cell;
+  }
+}
+.pop, .f-tip {
+  background-color:#D8EDFC;
+  border-radius:3px;
+  border:2px solid rgba(0,0,0,.5);
+  box-shadow:3px 3px 5px rgba(0,0,0,.1);
+}
+.pop{
+  display:none;
+  position:absolute;
+  bottom:12px;
+  left:-50px;
+  z-index:200
+}
+.pop:after,.pop:before{
+  top:100%;
+  content:" ";
+  height:0;
+  width:0;
+  position:absolute;
+  pointer-events:none
+}
+.pop:after{
+  border:solid transparent;
+  border-top-color:#D8EDFC;
+  border-width:10px;
+  left:48px;
+  margin-left:-10px
+}
+.pop:before{
+  border-top:1px solid rgba(0,0,0,.1);
+  border-left-color:transparent;
+  border-right-color:transparent;
+  border-bottom-color:transparent;
+  border-width:12px;
+  left:48px;
+  margin-left:-12px;
+  margin-top:.4px
+}
+.pop>.content{
+  margin:10px;
+  margin-top: -10px;
+  width:250px;
+  max-height:500px;
+  overflow:auto
+}
+.pop>.content .it-pg{
+  max-width:calc(100% - 7px)
+}
+.pop>.content .name{
+  margin-right:5px;
+}
+.pop .btn-x{
+  position:absolute;
+  top:3px;
+  right:3px;
+  z-index:2
+}
+.pop.fullscreen{
+  display:none;
+  position:absolute;
+  left:0;
+  top:0;
+  width:calc(100% - 10px);
+  height:calc(100% - 10px);
+  padding:5px;
+  background-color:#fff;
+  border:none;
+  border-radius:0;
+  z-index:1000;
+  overflow:auto
+}
+.pop.fullscreen>.content{
+  width:unset;
+  max-width:unset;
+  max-height:unset
+}
+.pop.fullscreen .btn{
+  margin:5px 1.5px
+}
+.proj h3 {
+  margin: 0;
+}
