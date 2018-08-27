@@ -6,13 +6,6 @@ new nyc.ol.FinderApp({
   facilityFormat: new nyc.ol.format.CartoSql(),
   facilityStyle: style,
   filterChoiceOptions: [{
-    title: 'Managing Agency',
-    choices: [
-      {name: 'agency_name', values: ['Department of Environmental Protection'], label: 'Department of Environmental Protection'},
-      {name: 'agency_name', values: ['Housing Preservation and Development'], label: 'Housing Preservation and Development'},
-      {name: 'agency_name', values: ['Department of Design and Construction'], label: 'Department of Design and Construction'}
-    ]
-  }, {
     title: 'Program',
     choices: [
       {name: 'program', values: ['Build It Back Single-Family'], label: 'Build It Back Single-Family'},
@@ -23,7 +16,15 @@ new nyc.ol.FinderApp({
       {name: 'program', values: ['Resiliency Innov. for a Stronger Economy (RISE:NYC)'], label: 'Resiliency Innovation for a Stronger Economy'}
 
     ]
+  }, {
+  title: 'Managing Agency',
+    choices: [
+      {name: 'agency_name', values: ['Department of Environmental Protection'], label: 'Department of Environmental Protection'},
+      {name: 'agency_name', values: ['Housing Preservation and Development'], label: 'Housing Preservation and Development'},
+      {name: 'agency_name', values: ['Department of Design and Construction'], label: 'Department of Design and Construction'}
+    ]
   }],
+
   facilitySearch: false,
   decorations: [decorations]
 });
@@ -47,3 +48,53 @@ $(document).ready(function() {
   map.addLayer(geoGroup.layers.zip);
   map.addLayer(geoGroup.layers.boro);
 });
+
+var layerChoices = new nyc.Choice({
+  target: $('<div></div>'),
+  choices: [
+    {name: 'layer', label: 'None', value: 'none', checked: true},
+    {name: 'layer', label: 'Sandy Inundation Zone', value: 'inundation'},
+  ],
+  radio: true
+});
+
+var layerCollapsible = new nyc.Collapsible({
+  target: $('<div></div>'),
+  title: 'Additional Layers',
+  content: layerChoices.getContainer(),
+  collapsed: true
+});
+$('#filters').append(layerCollapsible.getContainer());
+
+layerChoices.on('change', function() {
+  for (var layer in extraLayers) {
+    extraLayers[layer].setVisible(false);
+  }
+  var chosen = layerChoices.val()[0].value
+  extraLayers[chosen].setVisible(true);
+});
+
+
+var inundationLayer = new ol.layer.Tile({
+  zIndex: 0,
+  visible: false,
+  source: new ol.source.CartoDB({
+    account: 'nycomb-admin',
+    config: {
+      layers: [{
+        type: 'cartodb',
+        options: {
+          cartocss_version: '2.1.1',
+          cartocss: '#layer{polygon-fill:#627FE0;polygon-opacity:0.8;::outline{line-color:#FFFFFF;line-width:1;line-opacity:0.5;}}',
+          sql: 'select * from sandy_inundation_zone'
+        }
+      }]
+    }
+  })
+});
+
+finderApp.map.addLayer(inundationLayer);
+
+var extraLayers = {
+  inundation: inundationLayer,
+};

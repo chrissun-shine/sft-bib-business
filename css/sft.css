@@ -36,6 +36,10 @@
   border-radius:3px;
   border:2px solid rgba(0,0,0,.5);
   box-shadow:3px 3px 5px rgba(0,0,0,.1);
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-bottom: 10px;
 }
 .pop{
   display:none;
@@ -57,7 +61,6 @@
   border-top-color:#D8EDFC;
   border-width:10px;
   left:48px;
-  margin-left:-10px
 }
 .pop:before{
   border-top:1px solid rgba(0,0,0,.1);
@@ -70,8 +73,8 @@
   margin-top:.4px
 }
 .pop>.content{
-  margin:10px;
-  margin-top: -10px;
+  margin-left:1px;
+  margin-top: -2px;
   width:250px;
   max-height:500px;
   overflow:auto
