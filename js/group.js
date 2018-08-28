@@ -3,6 +3,7 @@ var geoGroup = new nyc.Choice({
   radio: true,
   choices: [
     {name: 'group', values: ['council'], label: 'Council District', checked: true},
+    {name: 'group', values: ['community'], label: 'Community District'},
     {name: 'group', values: ['zip'], label: 'Zip Code'},
     {name: 'group', values: ['boro'], label: 'Borough'}
   ]
@@ -59,8 +60,26 @@ var boroLayer = new ol.layer.Tile({
   })
 });
 
+var communityLayer = new ol.layer.Tile({
+  visible: false,
+  source: new ol.source.CartoDB({
+    account: 'nycomb-admin',
+    config: {
+      layers: [{
+        type: 'cartodb',
+        options: {
+          cartocss_version: '2.1.1',
+          cartocss: css,
+          sql: 'select cartodb_id, the_geom_webmercator, boro_cd as name from comm_boundaries'
+        }
+      }]
+    }
+  })
+});
+
 geoGroup.layers = {
   council: councilLayer,
+  community: communityLayer,
   zip: zipLayer,
   boro: boroLayer
 };

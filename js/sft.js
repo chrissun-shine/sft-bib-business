@@ -46,6 +46,7 @@ $(document).ready(function() {
   var map = finderApp.map;
   map.addLayer(geoGroup.layers.council);
   map.addLayer(geoGroup.layers.zip);
+  map.addLayer(geoGroup.layers.community); 
   map.addLayer(geoGroup.layers.boro);
 });
 

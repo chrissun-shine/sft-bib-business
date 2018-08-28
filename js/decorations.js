@@ -5,6 +5,7 @@ var decorations = {
   geoType: function(geo) {
     var geoType = {
       council: 'City Council District: ',
+      community: 'Community District: ',
       zip: 'ZIP Code: ',
       boro: ''
     }[geo];
