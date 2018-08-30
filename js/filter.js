@@ -5,7 +5,7 @@ nyc.ol.Filters.prototype.geoGroup = geoGroup;
 nyc.ol.Filters.prototype.projColumns = {
   zip: 'address_postal_code',
   boro: 'borough',
-  community: 'community_district',
+  community: 'community _district',
   council: 'council_district'
 };
 
