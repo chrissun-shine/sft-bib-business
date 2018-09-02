@@ -9,7 +9,7 @@ var geoGroup = new nyc.Choice({
   ]
 });
 
-var css ='#layer {line-color: #274b72;line-width:1}'
+var css ='#layer {line-color: #274b72;line-width:2}'
 var councilLayer = new ol.layer.Tile({
   source: new ol.source.CartoDB({
     account: 'nycomb-admin',
@@ -19,7 +19,7 @@ var councilLayer = new ol.layer.Tile({
         options: {
           cartocss_version: '2.1.1',
           cartocss: css,
-          sql: 'select cartodb_id, the_geom_webmercator, coun_dist as name from council_boundaries'
+          sql: 'select cartodb_id, the_geom_webmercator, rep as rep, coun_dist as name from council_boundaries'
         }
       }]
     }

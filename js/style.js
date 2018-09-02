@@ -9,6 +9,9 @@ function radius(count) {
 
 function style(feature, resolution) {
   var count = feature.get('count');
+  commacount = count.toLocaleString('en-US', {
+    style: 'decimal'
+  });
   var rad = radius(count);
   return [
     new ol.style.Style({
@@ -21,7 +24,8 @@ function style(feature, resolution) {
         })
       }),
       text: new ol.style.Text({
-        text: count + '',
+        text: commacount + '',
+        fontSize:'20px',
         fill: new ol.style.Fill({color: 'white'})
       })
     }),

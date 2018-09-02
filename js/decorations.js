@@ -9,7 +9,7 @@ var decorations = {
       zip: 'ZIP Code: ',
       boro: ''
     }[geo];
-    return $('<h3>' + geoType + '</h3>');
+    return $('<h3>' + geoType + '</h3>')
   },
   geoName: function(geo) {
     return this.get(this.finderApp.filters.projColumns[geo]);
@@ -18,22 +18,41 @@ var decorations = {
     var geo = this.geo();
     var type = this.geoType(geo);
     var count = this.get('count');
+    commacount = count.toLocaleString('en-US', {
+      style: 'decimal'
+    });
     return $('<div></div>')
       .append(type.append(this.geoName(geo)))
-      .append(count + ' applicant')
+      .append(commacount + ' applicant')
       .append(count > 1 ? 's' : '')
+  },
+
+  getDetails: function() {
+    var geo = this.geo();
+    var type = this.geoType(geo);
+    var count = this.get('count');
+    commacount = count.toLocaleString('en-US', {
+      style: 'decimal'
+    });
+    return $('<div></div>')
       .append(this.getDrawdown());
   },
+
   getDrawdown: function() {
     var drawdown = new Number(this.get('drawdown'));
     drawdown = drawdown.toLocaleString('en-US', {
       currency: 'USD',
-      style: 'currency'
+      style: 'currency',
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0
     });
-    return $('<div><p><b>Drawdown:</b></P></div>')
+    return $('<div><p><b>Total Drawdown:</b></P></div>')
       .append(drawdown);
   },
+
   html: function() {
-    return this.getName();
+    return $('<div></div>')
+      .append(this.getName())
+      .append(this.getDetails());
   }
 };
