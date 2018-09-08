@@ -20,15 +20,21 @@ nyc.ol.Filters.prototype.getGeo = function() {
   return this.geoGroup.getGroup();
 };
 
-nyc.ol.Filters.prototype.select = function(projCol) {
-  return 'select ST_AsText(g.the_geom_webmercator) wkt_geom, s.' + projCol + ', count(s.' + projCol + ') count, sum(s.total_drawdown_amount_with_fringe) drawdown';
+nyc.ol.Filters.prototype.select = function(projCol, popup) {
+  var select = 'select s.' + projCol + ', count(s.' + projCol + ') count, sum(s.total_drawdown_amount_with_fringe) drawdown';
+  if (popup) {
+    select += ', s.program, count(s.program) prg_count';
+  } else {
+    select += ', ST_AsText(g.the_geom_webmercator) wkt_geom';
+  }
+  return select;
 };
 
 nyc.ol.Filters.prototype.from = function() {
   return ' from bib_business_dataset s, ' + this.getGeo() + ' g';
 };
 
-nyc.ol.Filters.prototype.where = function(projCol, geoCol) {
+nyc.ol.Filters.prototype.where = function(projCol, geoCol, geoId) {
   var where = ['s.' + projCol + ' = g.' + geoCol];
   var namedFilters = {};
     for (var i = 0; i < this.choiceControls.length; i++) {
@@ -42,11 +48,20 @@ nyc.ol.Filters.prototype.where = function(projCol, geoCol) {
   for (var name in namedFilters) {
     where.push('s.' + name + ' in (' + namedFilters[name].join(',') + ')');
   }
+  if (geoId) {
+    where.push('g.' + geoCol + " = '" + geoId + "'");
+  }
   return ' where ' + where.join(' AND ');
 };
 
-nyc.ol.Filters.prototype.group = function(projCol) {
-return ' group by s.' + projCol + ', g.the_geom_webmercator';
+nyc.ol.Filters.prototype.group = function(projCol, popup) {
+  var group = ' group by s.' + projCol;
+  if (popup) {
+    group += ', s.program';
+  } else {
+    group += ', g.the_geom_webmercator'
+  }
+  return group;
 };
 
 nyc.ol.Filters.prototype.sql = function() {
@@ -74,4 +89,16 @@ nyc.ol.Filters.prototype.filter = function() {
       filters.trigger('change', filters);
     }
   });
+};
+
+nyc.ol.Filters.prototype.popupSql = function(geoId) {
+  var geo = this.getGeo();
+  var geoCol = this.geoColumns[geo];
+  var projCol = this.projColumns[geo];
+  return encodeURIComponent(
+    this.select(projCol, true) +
+    this.from(projCol) +
+    this.where(projCol, geoCol, geoId) +
+    this.group(projCol, true)
+  );
 };

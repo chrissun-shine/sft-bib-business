@@ -16,43 +16,50 @@ var decorations = {
   },
   getName: function() {
     var geo = this.geo();
-    var type = this.geoType(geo);
-    var count = this.get('count');
-    commacount = count.toLocaleString('en-US', {
-      style: 'decimal'
-    });
-    return $('<div></div>')
-      .append(type.append(this.geoName(geo)))
-      .append(commacount + ' applicant')
-      .append(count > 1 ? 's' : '')
+    return this.geoType(geo)
+      .append(this.geoName(geo));
   },
 
-  getDetails: function() {
-    var geo = this.geo();
-    var type = this.geoType(geo);
-    var count = this.get('count');
-    commacount = count.toLocaleString('en-US', {
-      style: 'decimal'
-    });
-    return $('<div></div>')
-      .append(this.getDrawdown());
+  detailsHtml: function(data) {
+    var rows = data ? data.rows : [this.getProperties()];
+    return this.getDetails(rows);
   },
 
-  getDrawdown: function() {
-    var drawdown = new Number(this.get('drawdown'));
+  getDetails: function(rows) {
+    var details = $('<div></div>');
+    var feature = this;
+    $.each(rows, function(_, row) {
+      var detail = $('<p></p>');
+      var program = row.program || '';
+      var count = program ? row.prg_count : row.count;
+      var commacount = count.toLocaleString('en-US', {
+        style: 'decimal'
+      });
+      detail.append('<div><b>' + program + '</b></div>')
+        .append('Applicant')
+        .append(count > 1 ? 's: ' : ': ')
+        .append(commacount)
+        .append(feature.getDrawdown(row, program));
+      details.append(detail);
+    });
+    return details;
+  },
+
+  getDrawdown: function(row) {
+    var drawdown = new Number(row.drawdown);
     drawdown = drawdown.toLocaleString('en-US', {
       currency: 'USD',
       style: 'currency',
       maximumFractionDigits: 0,
       minimumFractionDigits: 0
     });
-    return $('<div><p><b>Total Drawdown:</b></P></div>')
+    return $('<div>Total Drawdown: </div>')
       .append(drawdown);
   },
 
-  html: function() {
-    return $('<div></div>')
+  html: function(data) {
+    return $('<div class="sft-feature"></div>')
       .append(this.getName())
-      .append(this.getDetails());
+      .append(this.detailsHtml(data));
   }
 };
