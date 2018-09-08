@@ -9,7 +9,7 @@ var decorations = {
       zip: 'ZIP Code: ',
       boro: ''
     }[geo];
-    return $('<h3>' + geoType + '</h3>')
+    return $('<h3 class="name">' + geoType + '</h3>')
   },
   geoName: function(geo) {
     return this.get(this.finderApp.filters.projColumns[geo]);
@@ -20,9 +20,40 @@ var decorations = {
       .append(this.geoName(geo));
   },
 
-  detailsHtml: function(data) {
-    var rows = data ? data.rows : [this.getProperties()];
-    return this.getDetails(rows);
+  breakdownHtml: function() {
+    var feature = this;
+    var content = $('<div></div>');
+    var breakdown = new nyc.Collapsible({
+      target: $('<div></div>'),
+      title: 'Breakdown',
+      content: content,
+      collapsed: true
+    });
+    breakdown.one('change', function() {
+      breakdown.one('change', function() {
+        var finderApp = feature.finderApp;
+        var filters = finderApp.filters;
+        var source = finderApp.source;
+        var popup = finderApp.popup;
+        var projCol = filters.projColumns[filters.getGeo()];
+        var url = source.getUrl().split('?')[0];
+        $.ajax({
+          url: url + '?q=' + filters.popupSql(feature.get(projCol)),
+          success: function(data) {
+            content.html(feature.getDetails(data.rows));
+            if ($.contains(popup.getElement(), content.get(0))) {
+              popup.pan();
+            }
+          }
+        })
+      });
+    });
+    return breakdown.getContainer();
+  },
+
+  detailsHtml: function() {
+    return this.getDetails([this.getProperties()])
+      .append(this.breakdownHtml());
   },
 
   getDetails: function(rows) {
@@ -57,9 +88,9 @@ var decorations = {
       .append(drawdown);
   },
 
-  html: function(data) {
+  html: function() {
     return $('<div class="sft-feature"></div>')
       .append(this.getName())
-      .append(this.detailsHtml(data));
+      .append(this.detailsHtml());
   }
 };

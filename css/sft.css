@@ -146,7 +146,7 @@
 .proj h3 {
   margin: 0;
 }
-.sft-feature h3 {
+.sft-feature h3.name {
   margin: 0;
 }
 .sft-feature p {
@@ -156,8 +156,23 @@
 .sft-feature p:last-of-type {
   margin-bottom: 0;
 }
-.pop .sft-feature h3 {
+.pop .sft-feature h3.name {
   margin-top: 5px;
   margin-bottom: 5px;
   text-decoration: underline;
+}
+.fnd .lst-it .btn, .fnd .pop .btn {
+  width: 100%;
+}
+.lst-it .clps .content {
+  background-color:#fff;
+}
+.lst-it {
+  background-color:#D8EDFC;
+}
+.lst-it:nth-child(even), .pop .clps .content {
+  background-color: #fff;
+}
+.lst-it:nth-child(even) .clps .content {
+  background-color:#D8EDFC;
 }
