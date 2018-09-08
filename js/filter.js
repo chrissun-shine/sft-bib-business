@@ -91,7 +91,7 @@ nyc.ol.Filters.prototype.filter = function() {
   });
 };
 
-nyc.ol.Filters.prototype.popupSql = function(geoId) {
+nyc.ol.Filters.prototype.breakdownSql = function(geoId) {
   var geo = this.getGeo();
   var geoCol = this.geoColumns[geo];
   var projCol = this.projColumns[geo];

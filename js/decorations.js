@@ -38,7 +38,7 @@ var decorations = {
         var projCol = filters.projColumns[filters.getGeo()];
         var url = source.getUrl().split('?')[0];
         $.ajax({
-          url: url + '?q=' + filters.popupSql(feature.get(projCol)),
+          url: url + '?q=' + filters.breakdownSql(feature.get(projCol)),
           success: function(data) {
             content.html(feature.getDetails(data.rows));
             if ($.contains(popup.getElement(), content.get(0))) {
