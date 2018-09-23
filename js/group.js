@@ -19,7 +19,7 @@ var councilLayer = new ol.layer.Tile({
         options: {
           cartocss_version: '2.1.1',
           cartocss: css,
-          sql: 'select cartodb_id, the_geom_webmercator, rep as rep, coun_dist as name from council_boundaries'
+          sql: 'select cartodb_id, the_geom_webmercator, rep as councilRep, coun_dist as name from council_boundaries'
         }
       }]
     }
@@ -83,6 +83,8 @@ geoGroup.layers = {
   zip: zipLayer,
   boro: boroLayer
 };
+
+
 
 geoGroup.getGroup = function() {
   return this.val()[0].values[0];

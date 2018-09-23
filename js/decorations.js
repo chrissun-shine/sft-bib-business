@@ -20,6 +20,7 @@ var decorations = {
       .append(this.geoName(geo));
   },
 
+
   breakdownHtml: function() {
     var feature = this;
     var content = $('<div></div>');
@@ -67,7 +68,7 @@ var decorations = {
         style: 'decimal'
       });
       detail.append('<div><b>' + program + '</b></div>')
-        .append('Applicant')
+        .append('Active Applicant')
         .append(count > 1 ? 's: ' : ': ')
         .append(commacount)
         .append(feature.getDrawdown(row, program));

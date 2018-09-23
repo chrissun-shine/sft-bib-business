@@ -17,11 +17,13 @@ new nyc.ol.FinderApp({
 
     ]
   }, {
-  title: 'Managing Agency',
+  title: 'Applicant Type',
     choices: [
-      {name: 'agency_name', values: ['Department of Environmental Protection'], label: 'Department of Environmental Protection'},
-      {name: 'agency_name', values: ['Housing Preservation and Development'], label: 'Housing Preservation and Development'},
-      {name: 'agency_name', values: ['Department of Design and Construction'], label: 'Department of Design and Construction'}
+      {name: 'beneficiary_type', values: ['SF Home'], label: 'Single-Family Home'},
+      {name: 'beneficiary_type', values: ['MF Building'], label: 'Multifamily Building'},
+      {name: 'beneficiary_type', values: ['MF Unit'], label: 'Multifamily Individual Unit'},
+      {name: 'beneficiary_type', values: ['Business'], label: 'Business'},
+      {name: 'beneficiary_type', values: ['Renter'], label: 'TDAP Rental Assistance'}
     ]
   }],
 
