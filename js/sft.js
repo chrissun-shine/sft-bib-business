@@ -34,6 +34,16 @@ new nyc.ol.FinderApp({
 finderApp.pager.pageSize = 20;
 finderApp.layer.setZIndex(100);
 
+$('.nav').insertAfter('#banner');
+$('.nav .burg').click(function() {
+  $('.nav .lnks').slideToggle();
+});
+$(window).resize(function() {
+  if ($(window).width() > 510) {
+    $('.nav .lnks').show();
+  }
+});
+
 $(document).ready(function() {
   var collapsible = new nyc.Collapsible({
     target: $('<div id="group"></div>'),
@@ -99,5 +109,5 @@ var inundationLayer = new ol.layer.Tile({
 finderApp.map.addLayer(inundationLayer);
 
 var extraLayers = {
-  inundation: inundationLayer,
+  inundation: inundationLayer
 };

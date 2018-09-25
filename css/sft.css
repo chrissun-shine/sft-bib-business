@@ -176,3 +176,37 @@
 .lst-it:nth-child(even) .clps .content {
   background-color:#D8EDFC;
 }
+div.nav {
+  position: fixed;
+  top: 11px;
+  right: 0;
+  background-color: #274b72;
+  z-index: 1;
+}
+div.nav .lnks a {
+  color: #fff;
+  padding: 3px;
+}
+div.nav .burg {
+  display: none;
+}
+@media only screen and (max-width : 510px) {
+  div.nav .lnks {
+    display: none;
+    padding: 10px;
+  }
+  div.nav .lnks a {
+    display: block;
+  	padding-top: 10px;
+  }
+  div.nav .burg {
+    display: block;
+    cursor: pointer;
+    text-align: right;
+    color: #fff;
+    line-height: 7px;
+    padding-right: 10px;
+    margin-top: -3px;
+    font-size: 24px;
+  }
+}
