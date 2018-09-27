@@ -20,12 +20,15 @@ nyc.ol.Filters.prototype.getGeo = function() {
   return this.geoGroup.getGroup();
 };
 
-nyc.ol.Filters.prototype.select = function(projCol, popup) {
+nyc.ol.Filters.prototype.select = function(projCol, geo, popup) {
   var select = 'select s.' + projCol + ', count(s.' + projCol + ') count, sum(s.total_drawdown_amount_with_fringe) drawdown';
   if (popup) {
     select += ', s.program, count(s.program) prg_count';
   } else {
     select += ', ST_AsText(g.the_geom_webmercator) wkt_geom';
+  }
+  if (geo === 'boro' || geo === 'council') {
+    select += ', g.rep';
   }
   return select;
 };
@@ -54,12 +57,15 @@ nyc.ol.Filters.prototype.where = function(projCol, geoCol, geoId) {
   return ' where ' + where.join(' AND ');
 };
 
-nyc.ol.Filters.prototype.group = function(projCol, popup) {
+nyc.ol.Filters.prototype.group = function(projCol, geo, popup) {
   var group = ' group by s.' + projCol;
   if (popup) {
     group += ', s.program';
   } else {
     group += ', g.the_geom_webmercator'
+  }
+  if (geo === 'boro' || geo === 'council') {
+    group += ', g.rep';
   }
   return group;
 };
@@ -69,10 +75,10 @@ nyc.ol.Filters.prototype.sql = function() {
   var geoCol = this.geoColumns[geo];
   var projCol = this.projColumns[geo];
   return encodeURIComponent(
-    this.select(projCol) +
+    this.select(projCol, geo) +
     this.from(projCol) +
     this.where(projCol, geoCol) +
-    this.group(projCol)
+    this.group(projCol, geo)
   );
 };
 
@@ -96,9 +102,9 @@ nyc.ol.Filters.prototype.breakdownSql = function(geoId) {
   var geoCol = this.geoColumns[geo];
   var projCol = this.projColumns[geo];
   return encodeURIComponent(
-    this.select(projCol, true) +
+    this.select(projCol, geo, true) +
     this.from(projCol) +
     this.where(projCol, geoCol, geoId) +
-    this.group(projCol, true)
+    this.group(projCol, geo, true)
   );
 };

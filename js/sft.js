@@ -2,7 +2,7 @@ new nyc.ol.FinderApp({
   title: 'Sandy Funding Tracker',
   geoclientUrl: 'https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example',
   facilityTabTitle: 'Project Count',
-  facilityUrl: CARTO_URL + encodeURIComponent('select ST_AsText(g.the_geom_webmercator) wkt_geom, s.council_district, count(s.council_district) count, sum(s.total_drawdown_amount_with_fringe) drawdown from bib_business_dataset s, council g where s.council_district = g.cd group by s.council_district, g.the_geom_webmercator order by drawdown desc'),
+  facilityUrl: CARTO_URL + encodeURIComponent('select ST_AsText(g.the_geom_webmercator) wkt_geom, s.council_district, g.rep, count(s.council_district) count, sum(s.total_drawdown_amount_with_fringe) drawdown from bib_business_dataset s, council g where s.council_district = g.cd group by s.council_district, g.the_geom_webmercator, g.rep order by drawdown desc'),
   facilityFormat: new nyc.ol.format.CartoSql(),
   facilityStyle: style,
   filterChoiceOptions: [{

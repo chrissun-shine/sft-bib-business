@@ -89,9 +89,24 @@ var decorations = {
       .append(drawdown);
   },
 
+  getRep: function() {
+    const geo = this.geo();
+    if (geo === 'boro' || geo === 'council') {
+      const rep = this.get('rep');
+      const div = $('<divclass="rep"></div>');
+      if (geo === 'boro') {
+        return div.append('Borough President ' + rep)
+      }
+      if (geo === 'council') {
+        return div.append('Council Member ' + rep)
+      }
+    }
+  },
+
   html: function() {
     return $('<div class="sft-feature"></div>')
-      .append(this.getName())
-      .append(this.detailsHtml());
+    .append(this.getName())
+    .append(this.getRep())
+    .append(this.detailsHtml());
   }
 };
