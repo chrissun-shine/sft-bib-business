@@ -85,7 +85,7 @@ var decorations = {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0
     });
-    return $('<div>Total Drawdown: </div>')
+    return $('<div>Federal Reimbursement: </div>')
       .append(drawdown);
   },
 
@@ -103,10 +103,15 @@ var decorations = {
     }
   },
 
+  getFund: function() {
+    return $('<div>Funding Source: CDBG-DR </div>');
+  }, 
+
   html: function() {
     return $('<div class="sft-feature"></div>')
     .append(this.getName())
     .append(this.getRep())
+    .append(this.getFund())
     .append(this.detailsHtml());
   }
 };

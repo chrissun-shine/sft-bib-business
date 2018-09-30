@@ -8,22 +8,22 @@ new nyc.ol.FinderApp({
   filterChoiceOptions: [{
     title: 'Program',
     choices: [
-      {name: 'program', values: ['Build It Back Single-Family'], label: 'Build It Back Single-Family'},
-      {name: 'program', values: ['Build It Back Multifamily'], label: 'Build It Back Multifamily'},
-      {name: 'program', values: ['Build It Back Temporary Disaster Assistance Program'], label: 'Build It Back Temporary Disaster Assistance Program'},
-      {name: 'program', values: ['Business PREP'], label: 'Business PREP'},
-      {name: 'program', values: ['Hurricane Sandy Business Loan and Grant Program'], label: 'Hurricane Sandy Business Loan and Grant Program'},
-      {name: 'program', values: ['Resiliency Innov. for a Stronger Economy (RISE:NYC)'], label: 'Resiliency Innovation for a Stronger Economy'}
+      {name: 'program', values: ['Build It Back Single-Family'], label: 'Build It Back Single-Family', checked: true},
+      {name: 'program', values: ['Build It Back Multifamily'], label: 'Build It Back Multifamily', checked: true},
+      {name: 'program', values: ['Build It Back Temporary Disaster Assistance Program'], label: 'Build It Back Temporary Disaster Assistance Program', checked: true},
+      {name: 'program', values: ['Business PREP'], label: 'Business PREP', checked: true},
+      {name: 'program', values: ['Hurricane Sandy Business Loan and Grant Program'], label: 'Hurricane Sandy Business Loan and Grant Program', checked: true},
+      {name: 'program', values: ['Resiliency Innov. for a Stronger Economy (RISE:NYC)'], label: 'Resiliency Innovation for a Stronger Economy', checked: true}
 
     ]
   }, {
   title: 'Applicant Type',
     choices: [
-      {name: 'beneficiary_type', values: ['SF Home'], label: 'Single-Family Home'},
-      {name: 'beneficiary_type', values: ['MF Building'], label: 'Multifamily Building'},
-      {name: 'beneficiary_type', values: ['MF Unit'], label: 'Multifamily Individual Unit'},
-      {name: 'beneficiary_type', values: ['Business'], label: 'Business'},
-      {name: 'beneficiary_type', values: ['Renter'], label: 'TDAP Rental Assistance'}
+      {name: 'beneficiary_type', values: ['SF Home'], label: 'Single-Family Home', checked: true},
+      {name: 'beneficiary_type', values: ['MF Building'], label: 'Multifamily Building', checked: true},
+      {name: 'beneficiary_type', values: ['MF Unit'], label: 'Multifamily Individual Unit', checked: true},
+      {name: 'beneficiary_type', values: ['Business'], label: 'Business', checked: true},
+      {name: 'beneficiary_type', values: ['Renter'], label: 'TDAP Rental Assistance', checked: true}
     ]
   }],
 

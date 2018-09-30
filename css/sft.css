@@ -168,14 +168,23 @@
   background-color:#fff;
 }
 .lst-it {
-  background-color:#D8EDFC;
+  background-color:#ddd;
 }
 .lst-it:nth-child(even), .pop .clps .content {
   background-color: #fff;
 }
 .lst-it:nth-child(even) .clps .content {
-  background-color:#D8EDFC;
+  background-color:#fff;
 }
+
+div.foot {
+  position: fixed;
+  bottom: 11px;
+  left: 5px;
+  background-color: #00000000;
+  z-index: 1;
+}
+
 div.nav {
   position: fixed;
   top: 11px;
@@ -186,6 +195,7 @@ div.nav {
 div.nav .lnks a {
   color: #fff;
   padding: 3px;
+  margin-right: 10px;
 }
 div.nav .burg {
   display: none;
