@@ -60,6 +60,8 @@ $(document).ready(function() {
   map.addLayer(geoGroup.layers.zip);
   map.addLayer(geoGroup.layers.community); 
   map.addLayer(geoGroup.layers.boro);
+  map.addLayer(geoGroup.layers.senate);
+  map.addLayer(geoGroup.layers.assembly);
 });
 
 var layerChoices = new nyc.Choice({

@@ -7,6 +7,8 @@ var decorations = {
       council: 'City Council District: ',
       community: 'Community District: ',
       zip: 'ZIP Code: ',
+      senate: 'NYS Senate District: ',
+      assembly: 'NYS Assembly District: ',
       boro: ''
     }[geo];
     return $('<h3 class="name">' + geoType + '</h3>')

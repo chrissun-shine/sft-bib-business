@@ -6,14 +6,18 @@ nyc.ol.Filters.prototype.projColumns = {
   zip: 'address_postal_code',
   boro: 'borough',
   community: 'community_district',
-  council: 'council_district'
+  council: 'council_district',
+  senate: 'state_senate_district',
+  assembly: 'assembly_district'
 };
 
 nyc.ol.Filters.prototype.geoColumns = {
   zip: 'zip',
   boro: 'boro',
   community:'boro_cd',
-  council: 'cd'
+  council: 'cd',
+  senate: 'sen_dist',
+  assembly: 'ass_dis'
 };
 
 nyc.ol.Filters.prototype.getGeo = function() {
